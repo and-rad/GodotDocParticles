@@ -16,5 +16,7 @@ sky = SubResource( "Sky_axixy" )
 [node name="DefaultEnvironment" type="WorldEnvironment"]
 environment = SubResource( "Environment_2ndsf" )
 
-[node name="ScreenshotCam" type="Camera3D" parent="."]
-transform = Transform3D(0.692798, -0.359452, 0.62516, 1.49012e-08, 0.866915, 0.498456, -0.721132, -0.345329, 0.600597, 4.94574, 4.17498, 4.78513)
+[node name="CamPivot" type="Node3D" parent="."]
+
+[node name="ScreenshotCam" type="Camera3D" parent="CamPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)

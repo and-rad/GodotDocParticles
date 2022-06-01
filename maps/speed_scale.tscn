@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://y1p8tdkoed2q"]
+[gd_scene load_steps=5 format=3 uid="uid://cdjd3fqh6865o"]
 
 [ext_resource type="PackedScene" uid="uid://dbqb0kjpk1ryo" path="res://maps/environment.tscn" id="1_r4vr6"]
 
@@ -16,5 +16,7 @@ size = Vector2(0.1, 0.1)
 [node name="DefaultEnvironment" parent="." instance=ExtResource( "1_r4vr6" )]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+fixed_fps = 60
+interpolate = false
 process_material = SubResource( "ParticlesMaterial_d7tl2" )
 draw_pass_1 = SubResource( "QuadMesh_ignmr" )
