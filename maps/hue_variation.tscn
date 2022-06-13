@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://kj0spvq7ta58"]
+
+[ext_resource type="PackedScene" uid="uid://dbqb0kjpk1ryo" path="res://maps/environment.tscn" id="1_r4vr6"]
+
+[sub_resource type="ParticlesMaterial" id="ParticlesMaterial_jn0pi"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+gravity = Vector3(0, 0, 0)
+color = Color(0.266667, 0.709804, 1, 1)
+hue_variation_min = -0.6
+hue_variation_max = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kvmkn"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_ignmr"]
+material = SubResource( "StandardMaterial3D_kvmkn" )
+size = Vector2(0.1, 0.1)
+
+[sub_resource type="ParticlesMaterial" id="ParticlesMaterial_2bs0t"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+gravity = Vector3(0, 0, 0)
+color = Color(0.266667, 0.709804, 1, 1)
+hue_variation_min = -0.1
+hue_variation_max = 0.1
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DefaultEnvironment" parent="." instance=ExtResource( "1_r4vr6" )]
+
+[node name="CamPivot" parent="DefaultEnvironment" index="0"]
+visible = false
+
+[node name="Particles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0)
+amount = 128
+lifetime = 4.0
+process_material = SubResource( "ParticlesMaterial_jn0pi" )
+draw_pass_1 = SubResource( "QuadMesh_ignmr" )
+
+[node name="Particles2" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0)
+amount = 128
+lifetime = 4.0
+process_material = SubResource( "ParticlesMaterial_2bs0t" )
+draw_pass_1 = SubResource( "QuadMesh_ignmr" )
+
+[editable path="DefaultEnvironment"]

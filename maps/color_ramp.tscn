@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://bm04slntk3uf8"]
+
+[ext_resource type="PackedScene" uid="uid://dbqb0kjpk1ryo" path="res://maps/environment.tscn" id="1_r4vr6"]
+
+[sub_resource type="Gradient" id="Gradient_u3fjh"]
+offsets = PackedFloat32Array(0.0827586, 0.365517, 0.882759)
+colors = PackedColorArray(0.149507, 0.444724, 0.894531, 1, 0.0911269, 0.980469, 0.354857, 1, 0.851563, 0.334992, 0.398699, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_i0kar"]
+gradient = SubResource( "Gradient_u3fjh" )
+
+[sub_resource type="ParticlesMaterial" id="ParticlesMaterial_jn0pi"]
+emission_shape = 3
+emission_box_extents = Vector3(0.5, 0.5, 0.5)
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource( "GradientTexture1D_i0kar" )
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kvmkn"]
+shading_mode = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_ignmr"]
+material = SubResource( "StandardMaterial3D_kvmkn" )
+size = Vector2(0.1, 0.1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DefaultEnvironment" parent="." instance=ExtResource( "1_r4vr6" )]
+
+[node name="Particles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+lifetime = 2.0
+process_material = SubResource( "ParticlesMaterial_jn0pi" )
+draw_pass_1 = SubResource( "QuadMesh_ignmr" )

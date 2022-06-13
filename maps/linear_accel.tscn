@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://dywbt4sh4tpd1"]
+
+[ext_resource type="PackedScene" uid="uid://dbqb0kjpk1ryo" path="res://maps/environment.tscn" id="1_r4vr6"]
+
+[sub_resource type="Curve" id="Curve_f3msr"]
+min_value = -10.0
+max_value = 30.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 30), 50.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_p8415"]
+curve = SubResource( "Curve_f3msr" )
+
+[sub_resource type="ParticlesMaterial" id="ParticlesMaterial_jn0pi"]
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+linear_accel_min = 1.0
+linear_accel_max = 1.0
+linear_accel_curve = SubResource( "CurveTexture_p8415" )
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kvmkn"]
+shading_mode = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_ignmr"]
+material = SubResource( "StandardMaterial3D_kvmkn" )
+size = Vector2(0.1, 0.1)
+
+[sub_resource type="ParticlesMaterial" id="ParticlesMaterial_d7tl2"]
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+linear_accel_min = -0.2
+linear_accel_max = -0.2
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DefaultEnvironment" parent="." instance=ExtResource( "1_r4vr6" )]
+
+[node name="SpeedUp" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+lifetime = 4.0
+fixed_fps = 60
+interpolate = false
+process_material = SubResource( "ParticlesMaterial_jn0pi" )
+draw_pass_1 = SubResource( "QuadMesh_ignmr" )
+
+[node name="SlowDown" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+amount = 4
+lifetime = 8.0
+fixed_fps = 60
+interpolate = false
+process_material = SubResource( "ParticlesMaterial_d7tl2" )
+draw_pass_1 = SubResource( "QuadMesh_ignmr" )

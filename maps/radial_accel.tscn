@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://s4su4i8jp2hv"]
+
+[ext_resource type="PackedScene" uid="uid://dbqb0kjpk1ryo" path="res://maps/environment.tscn" id="1_r4vr6"]
+
+[sub_resource type="ParticlesMaterial" id="ParticlesMaterial_jn0pi"]
+emission_shape = 2
+emission_sphere_radius = 4.0
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -0.5
+radial_accel_max = -0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kvmkn"]
+shading_mode = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_ignmr"]
+material = SubResource( "StandardMaterial3D_kvmkn" )
+size = Vector2(0.05, 0.05)
+
+[sub_resource type="ParticlesMaterial" id="ParticlesMaterial_hxtd6"]
+emission_shape = 2
+emission_sphere_radius = 0.5
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = 2.0
+radial_accel_max = 2.0
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DefaultEnvironment" parent="." instance=ExtResource( "1_r4vr6" )]
+
+[node name="Negative" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+amount = 512
+lifetime = 4.0
+fixed_fps = 60
+interpolate = false
+process_material = SubResource( "ParticlesMaterial_jn0pi" )
+draw_pass_1 = SubResource( "QuadMesh_ignmr" )
+
+[node name="Positive" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+amount = 512
+lifetime = 2.0
+fixed_fps = 60
+interpolate = false
+process_material = SubResource( "ParticlesMaterial_hxtd6" )
+draw_pass_1 = SubResource( "QuadMesh_ignmr" )
