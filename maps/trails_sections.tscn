@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://dhunt8f4lj4q3"]
+
+[ext_resource type="PackedScene" uid="uid://dbqb0kjpk1ryo" path="res://maps/environment.tscn" id="1_r4vr6"]
+
+[sub_resource type="Gradient" id="Gradient_mnwtu"]
+colors = PackedColorArray(0.388577, 0.416733, 0.941406, 1, 1, 0.0777401, 0.0702797, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bw3sa"]
+gradient = SubResource( "Gradient_mnwtu" )
+
+[sub_resource type="ParticlesMaterial" id="ParticlesMaterial_d7tl2"]
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 7.0
+initial_velocity_max = 10.0
+color_ramp = SubResource( "GradientTexture1D_bw3sa" )
+hue_variation_min = -0.2
+hue_variation_max = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d8vla"]
+cull_mode = 2
+shading_mode = 0
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+use_particle_trails = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_rqf6c"]
+material = SubResource( "StandardMaterial3D_d8vla" )
+shape = 0
+size = 0.2
+sections = 12
+section_length = 0.25
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DefaultEnvironment" parent="." instance=ExtResource( "1_r4vr6" )]
+
+[node name="CamPivot" parent="DefaultEnvironment" index="0"]
+visible = false
+
+[node name="Particles" type="GPUParticles3D" parent="."]
+amount = 24
+lifetime = 4.0
+interpolate = false
+trail_enabled = true
+trail_length_secs = 1.0
+process_material = SubResource( "ParticlesMaterial_d7tl2" )
+draw_pass_1 = SubResource( "RibbonTrailMesh_rqf6c" )
+
+[editable path="DefaultEnvironment"]

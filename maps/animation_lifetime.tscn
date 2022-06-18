@@ -1,0 +1,60 @@
+[gd_scene load_steps=10 format=3 uid="uid://c7uvor1en7s3v"]
+
+[ext_resource type="PackedScene" uid="uid://dbqb0kjpk1ryo" path="res://maps/environment.tscn" id="1_1fdcd"]
+[ext_resource type="Texture2D" uid="uid://dlk1sy8oebda0" path="res://sprite_smoke.png" id="2_cop0h"]
+
+[sub_resource type="Gradient" id="Gradient_lbxg1"]
+offsets = PackedFloat32Array(0, 0.255172, 0.756906, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ib46b"]
+gradient = SubResource( "Gradient_lbxg1" )
+
+[sub_resource type="Curve" id="Curve_0yej4"]
+max_value = 2.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 2), 2.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_q2whb"]
+curve = SubResource( "Curve_0yej4" )
+
+[sub_resource type="ParticlesMaterial" id="ParticlesMaterial_3okq4"]
+direction = Vector3(0, 1, 0)
+spread = 20.0
+gravity = Vector3(0, 0, 0)
+angular_velocity_min = -10.0
+angular_velocity_max = 10.0
+angle_min = -90.0
+angle_max = 90.0
+scale_curve = SubResource( "CurveTexture_q2whb" )
+color_ramp = SubResource( "GradientTexture1D_ib46b" )
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5aiwy"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource( "2_cop0h" )
+billboard_mode = 3
+particles_anim_h_frames = 8
+particles_anim_v_frames = 8
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_k2kd7"]
+material = SubResource( "StandardMaterial3D_5aiwy" )
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DefaultEnvironment" parent="." instance=ExtResource( "1_1fdcd" )]
+
+[node name="CamPivot" parent="DefaultEnvironment" index="0"]
+visible = false
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
+amount = 1
+lifetime = 8.0
+process_material = SubResource( "ParticlesMaterial_3okq4" )
+draw_pass_1 = SubResource( "QuadMesh_k2kd7" )
+
+[editable path="DefaultEnvironment"]

@@ -1,0 +1,197 @@
+[gd_scene load_steps=23 format=3 uid="uid://b81hdfcfyh0vf"]
+
+[ext_resource type="PackedScene" uid="uid://dbqb0kjpk1ryo" path="res://maps/environment.tscn" id="1_r4vr6"]
+[ext_resource type="ArrayMesh" uid="uid://db4rtdpags08q" path="res://skinned_mesh.res" id="2_afjck"]
+[ext_resource type="Skin" uid="uid://drew1xqi1qj3n" path="res://skin.tres" id="3_6ikfp"]
+[ext_resource type="Curve" uid="uid://ce3jnb8v51yyf" path="res://trail_curve.tres" id="4_7lnqs"]
+[ext_resource type="Curve" uid="uid://oy83r4hkp10" path="res://trail_curve2.tres" id="4_qylvn"]
+
+[sub_resource type="Gradient" id="Gradient_mnwtu"]
+colors = PackedColorArray(0.388577, 0.416733, 0.941406, 1, 1, 0.0777401, 0.0702797, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bw3sa"]
+gradient = SubResource( "Gradient_mnwtu" )
+
+[sub_resource type="ParticlesMaterial" id="ParticlesMaterial_d7tl2"]
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 7.0
+initial_velocity_max = 10.0
+color_ramp = SubResource( "GradientTexture1D_bw3sa" )
+hue_variation_min = -0.2
+hue_variation_max = 0.2
+
+[sub_resource type="Curve" id="Curve_ghtjg"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gk3um"]
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+use_particle_trails = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_catpv"]
+material = SubResource( "StandardMaterial3D_gk3um" )
+shape = 0
+size = 0.1
+sections = 12
+curve = SubResource( "Curve_ghtjg" )
+
+[sub_resource type="ParticlesMaterial" id="ParticlesMaterial_swsnx"]
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 7.0
+initial_velocity_max = 7.0
+
+[sub_resource type="Curve" id="Curve_psgq0"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.3, 0.5), 0.0, 0.0, 0, 0, Vector2(0.67, 0.7), 0.0, 0.0, 0, 0, Vector2(1, 0.3), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cbf7g"]
+emission_enabled = true
+emission = Color(0.831373, 0.486275, 0.392157, 1)
+use_particle_trails = true
+
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_eb4tg"]
+material = SubResource( "StandardMaterial3D_cbf7g" )
+curve = SubResource( "Curve_psgq0" )
+
+[sub_resource type="ParticlesMaterial" id="ParticlesMaterial_waj3p"]
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 6.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d8vla"]
+cull_mode = 2
+shading_mode = 0
+use_particle_trails = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_rqf6c"]
+material = SubResource( "StandardMaterial3D_d8vla" )
+shape = 0
+size = 0.25
+sections = 3
+section_length = 1.0
+
+[sub_resource type="ParticlesMaterial" id="ParticlesMaterial_bc47b"]
+direction = Vector3(0, 1, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 2.0
+initial_velocity_max = 2.0
+color_ramp = SubResource( "GradientTexture1D_bw3sa" )
+hue_variation_min = -0.2
+hue_variation_max = 0.2
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_2xfqp"]
+material = SubResource( "StandardMaterial3D_d8vla" )
+shape = 0
+size = 1.878
+sections = 3
+section_length = 0.4
+section_segments = 12
+curve = ExtResource( "4_qylvn" )
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_4oupo"]
+material = SubResource( "StandardMaterial3D_d8vla" )
+shape = 0
+size = 1.878
+sections = 3
+section_length = 0.4
+section_segments = 1
+curve = ExtResource( "4_7lnqs" )
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_xqdsj"]
+material = SubResource( "StandardMaterial3D_d8vla" )
+shape = 0
+size = 1.878
+sections = 3
+section_length = 0.4
+section_segments = 12
+curve = ExtResource( "4_7lnqs" )
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DefaultEnvironment" parent="." instance=ExtResource( "1_r4vr6" )]
+
+[node name="CamPivot" parent="DefaultEnvironment" index="0"]
+visible = false
+
+[node name="ScreenshotCam" parent="DefaultEnvironment/CamPivot" index="0"]
+visible = false
+
+[node name="Ribbon" type="GPUParticles3D" parent="."]
+visible = false
+amount = 32
+lifetime = 3.0
+trail_enabled = true
+trail_length_secs = 0.86
+process_material = SubResource( "ParticlesMaterial_d7tl2" )
+draw_pass_1 = SubResource( "RibbonTrailMesh_catpv" )
+
+[node name="Tube" type="GPUParticles3D" parent="."]
+visible = false
+lifetime = 4.0
+transform_align = 2
+trail_enabled = true
+trail_length_secs = 0.72
+process_material = SubResource( "ParticlesMaterial_swsnx" )
+draw_pass_1 = SubResource( "TubeTrailMesh_eb4tg" )
+
+[node name="Mesh" type="GPUParticles3D" parent="."]
+visible = false
+amount = 16
+lifetime = 3.0
+speed_scale = 0.37
+interpolate = false
+trail_enabled = true
+trail_length_secs = 0.56
+process_material = SubResource( "ParticlesMaterial_waj3p" )
+draw_pass_1 = ExtResource( "2_afjck" )
+draw_skin = ExtResource( "3_6ikfp" )
+
+[node name="HowTo" type="GPUParticles3D" parent="."]
+visible = false
+amount = 24
+lifetime = 4.0
+interpolate = false
+trail_enabled = true
+trail_length_secs = 0.86
+process_material = SubResource( "ParticlesMaterial_d7tl2" )
+draw_pass_1 = SubResource( "RibbonTrailMesh_rqf6c" )
+
+[node name="Curves" type="GPUParticles3D" parent="."]
+transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0, 0, 0)
+visible = false
+amount = 4
+lifetime = 8.0
+interpolate = false
+trail_enabled = true
+trail_length_secs = 2.0
+process_material = SubResource( "ParticlesMaterial_bc47b" )
+draw_pass_1 = SubResource( "RibbonTrailMesh_2xfqp" )
+
+[node name="SegmentsLow" type="GPUParticles3D" parent="."]
+transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0, 1, 0)
+amount = 4
+lifetime = 8.0
+interpolate = false
+trail_enabled = true
+trail_length_secs = 2.0
+process_material = SubResource( "ParticlesMaterial_bc47b" )
+draw_pass_1 = SubResource( "RibbonTrailMesh_4oupo" )
+
+[node name="SegmentsHigh" type="GPUParticles3D" parent="."]
+transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0, -1, 0)
+amount = 4
+lifetime = 8.0
+interpolate = false
+trail_enabled = true
+trail_length_secs = 2.0
+process_material = SubResource( "ParticlesMaterial_bc47b" )
+draw_pass_1 = SubResource( "RibbonTrailMesh_xqdsj" )
+
+[editable path="DefaultEnvironment"]

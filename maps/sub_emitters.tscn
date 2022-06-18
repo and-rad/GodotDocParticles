@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://dqam11sv1iq43"]
+
+[ext_resource type="PackedScene" uid="uid://dbqb0kjpk1ryo" path="res://maps/environment.tscn" id="1_cik2b"]
+
+[sub_resource type="ParticlesMaterial" id="ParticlesMaterial_wd8ac"]
+direction = Vector3(0, 1, 0)
+spread = 20.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kvmkn"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_u11qf"]
+material = SubResource( "StandardMaterial3D_kvmkn" )
+size = Vector2(0.1, 0.1)
+
+[sub_resource type="ParticlesMaterial" id="ParticlesMaterial_uw0d8"]
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+color = Color(1, 0.780392, 0.219608, 1)
+sub_emitter_mode = 2
+sub_emitter_amount_at_end = 4
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DefaultEnvironment" parent="." instance=ExtResource( "1_cik2b" )]
+
+[node name="ParentParticles" type="GPUParticles3D" parent="."]
+amount = 1
+lifetime = 2.0
+process_material = SubResource( "ParticlesMaterial_wd8ac" )
+draw_pass_1 = SubResource( "QuadMesh_u11qf" )
+
+[node name="ChildParticles" type="GPUParticles3D" parent="."]
+emitting = false
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( "ParticlesMaterial_uw0d8" )
+draw_pass_1 = SubResource( "QuadMesh_u11qf" )

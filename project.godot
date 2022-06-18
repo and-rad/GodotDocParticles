@@ -11,5 +11,11 @@ config_version=5
 [application]
 
 config/name="Godot Doc Particles"
-config/icon="res://icon.png"
 config/features=PackedStringArray("4.0", "Vulkan Clustered")
+config/icon="res://icon.png"
+
+[rendering]
+
+shadows/directional_shadow/soft_shadow_quality=4
+shadows/shadows/soft_shadow_quality=4
+anti_aliasing/quality/msaa=3
