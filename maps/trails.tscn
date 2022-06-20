@@ -142,13 +142,13 @@ process_material = SubResource( "ParticlesMaterial_swsnx" )
 draw_pass_1 = SubResource( "TubeTrailMesh_eb4tg" )
 
 [node name="Mesh" type="GPUParticles3D" parent="."]
-visible = false
 amount = 16
 lifetime = 3.0
 speed_scale = 0.37
 interpolate = false
+transform_align = 2
 trail_enabled = true
-trail_length_secs = 0.56
+trail_length_secs = 0.7
 process_material = SubResource( "ParticlesMaterial_waj3p" )
 draw_pass_1 = ExtResource( "2_afjck" )
 draw_skin = ExtResource( "3_6ikfp" )
@@ -176,6 +176,7 @@ draw_pass_1 = SubResource( "RibbonTrailMesh_2xfqp" )
 
 [node name="SegmentsLow" type="GPUParticles3D" parent="."]
 transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 amount = 4
 lifetime = 8.0
 interpolate = false
@@ -186,6 +187,7 @@ draw_pass_1 = SubResource( "RibbonTrailMesh_4oupo" )
 
 [node name="SegmentsHigh" type="GPUParticles3D" parent="."]
 transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0, -1, 0)
+visible = false
 amount = 4
 lifetime = 8.0
 interpolate = false

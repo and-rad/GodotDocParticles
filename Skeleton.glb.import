@@ -1,0 +1,37 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://dpdjor43k7jlb"
+path="res://.godot/imported/Skeleton.glb-93eeedc2376385fb34e59bd6e49fb1b5.scn"
+
+[deps]
+
+source_file="res://Skeleton.glb"
+dest_files=["res://.godot/imported/Skeleton.glb-93eeedc2376385fb34e59bd6e49fb1b5.scn"]
+
+[params]
+
+nodes/root_type="Node3D"
+nodes/root_name="Scene Root"
+nodes/root_scale=1.0
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+import_script/path=""
+_subresources={
+"meshes": {
+"Skeleton_Sphere": {
+"generate/lightmap_uv": 2,
+"generate/lods": 2,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://skinned_mesh.res"
+}
+}
+}
