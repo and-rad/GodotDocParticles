@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://d4d50si2kaxj6"]
+
+[ext_resource type="PackedScene" uid="uid://dbqb0kjpk1ryo" path="res://maps/environment.tscn" id="1_r4vr6"]
+
+[sub_resource type="ParticlesMaterial" id="ParticlesMaterial_d7tl2"]
+emission_shape = 3
+emission_box_extents = Vector3(11.009, 0.1, 4)
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kvmkn"]
+shading_mode = 0
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_ignmr"]
+material = SubResource("StandardMaterial3D_kvmkn")
+size = Vector2(0.05, 0.05)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DefaultEnvironment" parent="." instance=ExtResource("1_r4vr6")]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 10000
+lifetime = 8.0
+visibility_aabb = AABB(-10.8775, -4, -4, 21.7549, 8, 8)
+process_material = SubResource("ParticlesMaterial_d7tl2")
+draw_pass_1 = SubResource("QuadMesh_ignmr")
+
+[node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.05553, 0, -1.53198)
+strength = -4.0
