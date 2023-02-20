@@ -1,0 +1,99 @@
+[gd_scene load_steps=13 format=3 uid="uid://c8017nnxcrydk"]
+
+[ext_resource type="PackedScene" uid="uid://dbqb0kjpk1ryo" path="res://maps/environment.tscn" id="1_r4vr6"]
+[ext_resource type="Texture2D" uid="uid://bjua0j3fbsqmj" path="res://textures/sprite.webp" id="2_baony"]
+[ext_resource type="PackedScene" uid="uid://txw32lji0p21" path="res://Landscape.glb" id="2_vsrq0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1u6kt"]
+transparency = 1
+albedo_texture = ExtResource("2_baony")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticlesMaterial_d7tl2"]
+emission_shape = 3
+emission_box_extents = Vector3(10, 2, 10)
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_kv5ri"]
+size = Vector2(0.05, 0.05)
+
+[sub_resource type="PrismMesh" id="PrismMesh_y316x"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_7vn5v"]
+data = PackedVector3Array(0, 1, 1, 1, -1, 1, -1, -1, 1, 0, 1, -1, -1, -1, -1, 1, -1, -1, 0, 1, 1, 0, 1, -1, 1, -1, 1, 0, 1, -1, 1, -1, -1, 1, -1, 1, 0, 1, -1, 0, 1, 1, -1, -1, -1, 0, 1, 1, -1, -1, 1, -1, -1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sxeuc"]
+albedo_color = Color(0.901961, 0.407843, 1, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y5m2e"]
+spread = 10.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 6.0
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.14
+
+[sub_resource type="SphereMesh" id="SphereMesh_slgt5"]
+radius = 0.05
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e8mmd"]
+albedo_color = Color(0.427451, 0.584314, 0.564706, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DefaultEnvironment" parent="." instance=ExtResource("1_r4vr6")]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.0338, 0)
+material_override = SubResource("StandardMaterial3D_1u6kt")
+cast_shadow = 0
+amount = 100000
+lifetime = 30.0
+fixed_fps = 60
+process_material = SubResource("ParticlesMaterial_d7tl2")
+draw_pass_1 = SubResource("QuadMesh_kv5ri")
+
+[node name="GPUParticlesCollisionHeightField3D" type="GPUParticlesCollisionHeightField3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+extents = Vector3(200, 4, 200)
+resolution = 5
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.515038, 0, 0.857167, 0, 1, 0, -0.857167, 0, 0.515038, 0, 0, 0)
+visible = false
+mesh = SubResource("PrismMesh_y316x")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D2"]
+shape = SubResource("ConcavePolygonShape3D_7vn5v")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -4.2)
+visible = false
+material_override = SubResource("StandardMaterial3D_sxeuc")
+amount = 24
+lifetime = 4.0
+fixed_fps = 60
+visibility_aabb = AABB(-9.69164, -4, -4, 19.3833, 8, 8)
+process_material = SubResource("ParticleProcessMaterial_y5m2e")
+draw_pass_1 = SubResource("SphereMesh_slgt5")
+
+[node name="Landscape" parent="." instance=ExtResource("2_vsrq0")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+
+[node name="Plane" parent="Landscape" index="0"]
+material_override = SubResource("StandardMaterial3D_e8mmd")
+
+[node name="StaticBody3D" parent="Landscape/Plane" index="0"]
+visible = false
+
+[editable path="Landscape"]

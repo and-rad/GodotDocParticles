@@ -1,0 +1,26 @@
+[remap]
+
+importer="3d_texture"
+type="CompressedTexture3D"
+uid="uid://dqncqhn2ucsig"
+path="res://.godot/imported/vector_field_16x16.bmp-60756debd08d6ca879df113c13d7afca.ctex3d"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://textures/vector_field_16x16.bmp"
+dest_files=["res://.godot/imported/vector_field_16x16.bmp-60756debd08d6ca879df113c13d7afca.ctex3d"]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/bptc_ldr=0
+compress/channel_pack=0
+mipmaps/generate=false
+mipmaps/limit=-1
+slices/horizontal=16
+slices/vertical=1

@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://bw5sjsbrni410"]
+
+[ext_resource type="PackedScene" uid="uid://dbqb0kjpk1ryo" path="res://maps/environment.tscn" id="1_r4vr6"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticlesMaterial_d7tl2"]
+particle_flag_rotate_y = true
+direction = Vector3(-1, 0, 0)
+spread = 25.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+angular_velocity_min = -77.6
+angular_velocity_max = 77.59
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gtl46"]
+albedo_color = Color(1, 0.701961, 0.215686, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_is4pm"]
+material = SubResource("StandardMaterial3D_gtl46")
+size = Vector3(0.1, 0.25, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_10762"]
+albedo_color = Color(0.309804, 0.603922, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_hra74"]
+material = SubResource("StandardMaterial3D_10762")
+radius = 0.08
+height = 0.16
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DefaultEnvironment" parent="." instance=ExtResource("1_r4vr6")]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 24
+lifetime = 4.0
+process_material = SubResource("ParticlesMaterial_d7tl2")
+draw_passes = 2
+draw_pass_1 = SubResource("BoxMesh_is4pm")
+draw_pass_2 = SubResource("SphereMesh_hra74")

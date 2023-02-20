@@ -1,0 +1,71 @@
+[gd_scene load_steps=10 format=3 uid="uid://dpr5kkvqvn7gj"]
+
+[ext_resource type="PackedScene" uid="uid://dbqb0kjpk1ryo" path="res://maps/environment.tscn" id="1_r4vr6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1u6kt"]
+albedo_color = Color(0.776471, 1, 0.521569, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticlesMaterial_d7tl2"]
+spread = 5.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 6.0
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.14
+
+[sub_resource type="SphereMesh" id="SphereMesh_wjaac"]
+radius = 0.05
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y7i6y"]
+albedo_color = Color(0.901961, 0.407843, 1, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pg43y"]
+spread = 10.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 6.0
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.14
+
+[sub_resource type="SphereMesh" id="SphereMesh_jgn4s"]
+radius = 0.05
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2v4jh"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_jxawy"]
+size = Vector3(2, 2, 2)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DefaultEnvironment" parent="." instance=ExtResource("1_r4vr6")]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2, 0, 0)
+material_override = SubResource("StandardMaterial3D_1u6kt")
+amount = 24
+lifetime = 4.0
+fixed_fps = 60
+visibility_aabb = AABB(-9.69164, -4, -4, 19.3833, 8, 8)
+process_material = SubResource("ParticlesMaterial_d7tl2")
+draw_pass_1 = SubResource("SphereMesh_wjaac")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -4.2)
+material_override = SubResource("StandardMaterial3D_y7i6y")
+amount = 24
+lifetime = 4.0
+fixed_fps = 60
+visibility_aabb = AABB(-9.69164, -4, -4, 19.3833, 8, 8)
+process_material = SubResource("ParticleProcessMaterial_pg43y")
+draw_pass_1 = SubResource("SphereMesh_jgn4s")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GPUParticlesCollisionBox3D"]
+material_override = SubResource("StandardMaterial3D_2v4jh")
+mesh = SubResource("BoxMesh_jxawy")

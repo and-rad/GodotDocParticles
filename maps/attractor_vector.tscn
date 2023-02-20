@@ -1,7 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://dqgyl1l8lm8d8"]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="PackedScene" uid="uid://dbqb0kjpk1ryo" path="res://maps/environment.tscn" id="1_1pi4a"]
-[ext_resource type="CompressedTexture3D" uid="uid://dqncqhn2ucsig" path="res://vector_field_16x16.bmp" id="1_cs7g0"]
+[ext_resource type="CompressedTexture3D" uid="uid://dqncqhn2ucsig" path="res://textures/vector_field_16x16.bmp" id="1_cs7g0"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uh8yg"]
 emission_shape = 1

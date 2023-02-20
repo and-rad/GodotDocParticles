@@ -7,14 +7,15 @@ ground_bottom_color = Color(0.121569, 0.121569, 0.129412, 1)
 ground_horizon_color = Color(0.160784, 0.160784, 0.160784, 1)
 
 [sub_resource type="Sky" id="Sky_axixy"]
-sky_material = SubResource( "ProceduralSkyMaterial_xhnyf" )
+sky_material = SubResource("ProceduralSkyMaterial_xhnyf")
 
 [sub_resource type="Environment" id="Environment_2ndsf"]
 background_mode = 2
-sky = SubResource( "Sky_axixy" )
+sky = SubResource("Sky_axixy")
+ssr_enabled = true
 
 [node name="DefaultEnvironment" type="WorldEnvironment"]
-environment = SubResource( "Environment_2ndsf" )
+environment = SubResource("Environment_2ndsf")
 
 [node name="CamPivot" type="Node3D" parent="."]
 

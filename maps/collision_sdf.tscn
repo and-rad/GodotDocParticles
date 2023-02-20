@@ -1,0 +1,108 @@
+[gd_scene load_steps=12 format=3 uid="uid://dj7rkfljncx0j"]
+
+[ext_resource type="PackedScene" uid="uid://dbqb0kjpk1ryo" path="res://maps/environment.tscn" id="1_r4vr6"]
+[ext_resource type="PackedScene" uid="uid://w3uipksve6gw" path="res://robot.glb" id="2_cch5g"]
+[ext_resource type="CompressedTexture3D" uid="uid://do8tq8nw7ympe" path="res://maps/collision_sdf.GPUParticlesCollisionSDF3D_16_data.exr" id="3_3aqbb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y7i6y"]
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pg43y"]
+direction = Vector3(-1, 0, 0)
+spread = 30.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 6.0
+color = Color(0.901961, 0.407843, 1, 1)
+hue_variation_min = 0.94
+hue_variation_max = 1.0
+collision_mode = 1
+collision_friction = 1.0
+collision_bounce = 0.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_tn2vp"]
+size = Vector2(0.02, 0.02)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l06gk"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ka7dn"]
+size = Vector3(11.608, 11.375, 0.173)
+
+[sub_resource type="Animation" id="Animation_lfmwr"]
+resource_name = "Play"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles3D2:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_aut54"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles3D2:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1jwjd"]
+_data = {
+"Play": SubResource("Animation_lfmwr"),
+"RESET": SubResource("Animation_aut54")
+}
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DefaultEnvironment" parent="." instance=ExtResource("1_r4vr6")]
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 1.80223)
+material_override = SubResource("StandardMaterial3D_y7i6y")
+cast_shadow = 0
+emitting = false
+amount = 200000
+lifetime = 8.0
+fixed_fps = 60
+visibility_aabb = AABB(-9.69164, -5.33872, -5.3955, 19.3833, 10.6774, 10.791)
+process_material = SubResource("ParticleProcessMaterial_pg43y")
+draw_pass_1 = SubResource("QuadMesh_tn2vp")
+
+[node name="robot" parent="." instance=ExtResource("2_cch5g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.224628, -0.800237, 0)
+
+[node name="GPUParticlesCollisionSDF3D" type="GPUParticlesCollisionSDF3D" parent="."]
+extents = Vector3(0.62, 1, 0.74)
+resolution = 0
+thickness = 0.05
+texture = ExtResource("3_3aqbb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.81571)
+material_override = SubResource("StandardMaterial3D_l06gk")
+mesh = SubResource("BoxMesh_ka7dn")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="MeshInstance3D"]
+extents = Vector3(5.67924, 5.56101, 0.0859837)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1jwjd")
+}

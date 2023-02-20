@@ -1,7 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://cv5n1yj82e083"]
+[gd_scene load_steps=18 format=3]
 
 [ext_resource type="PackedScene" uid="uid://dbqb0kjpk1ryo" path="res://maps/environment.tscn" id="1_1fdcd"]
-[ext_resource type="Texture2D" uid="uid://dlk1sy8oebda0" path="res://sprite_smoke.png" id="2_cop0h"]
+[ext_resource type="Texture2D" uid="uid://dlk1sy8oebda0" path="res://textures/sprite_smoke.png" id="2_cop0h"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_t4b6c"]
 size = Vector3(4, 0.1, 4)

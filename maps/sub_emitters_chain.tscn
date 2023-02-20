@@ -2,68 +2,71 @@
 
 [ext_resource type="PackedScene" uid="uid://dbqb0kjpk1ryo" path="res://maps/environment.tscn" id="1_cik2b"]
 
-[sub_resource type="ParticlesMaterial" id="ParticlesMaterial_wd8ac"]
+[sub_resource type="ParticleProcessMaterial" id="ParticlesMaterial_wd8ac"]
 direction = Vector3(0, 1, 0)
-spread = 20.0
+spread = 81.4
 gravity = Vector3(0, 0, 0)
-initial_velocity_min = 1.0
-initial_velocity_max = 1.0
+initial_velocity_min = 2.0
+initial_velocity_max = 3.0
 sub_emitter_mode = 2
-sub_emitter_amount_at_end = 4
+sub_emitter_amount_at_end = 8
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kvmkn"]
 shading_mode = 0
 vertex_color_use_as_albedo = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_u11qf"]
-material = SubResource( "StandardMaterial3D_kvmkn" )
+material = SubResource("StandardMaterial3D_kvmkn")
 size = Vector2(0.1, 0.1)
 
-[sub_resource type="ParticlesMaterial" id="ParticlesMaterial_uw0d8"]
+[sub_resource type="ParticleProcessMaterial" id="ParticlesMaterial_uw0d8"]
 spread = 180.0
-gravity = Vector3(0, 0, 0)
+gravity = Vector3(0, -0.1, 0)
 initial_velocity_min = 1.0
 initial_velocity_max = 1.0
 color = Color(1, 0.780392, 0.219608, 1)
 sub_emitter_mode = 2
-sub_emitter_amount_at_end = 4
+sub_emitter_amount_at_end = 8
 
-[sub_resource type="ParticlesMaterial" id="ParticlesMaterial_nst7h"]
+[sub_resource type="ParticleProcessMaterial" id="ParticlesMaterial_nst7h"]
+lifetime_randomness = 1.0
 spread = 180.0
-gravity = Vector3(0, 0, 0)
+gravity = Vector3(0, -1, 0)
 initial_velocity_min = 1.0
 initial_velocity_max = 1.0
 color = Color(0.211765, 0.788235, 1, 1)
 
 [node name="Node3D" type="Node3D"]
 
-[node name="DefaultEnvironment" parent="." instance=ExtResource( "1_cik2b" )]
+[node name="DefaultEnvironment" parent="." instance=ExtResource("1_cik2b")]
 
 [node name="CamPivot" parent="DefaultEnvironment" index="0"]
 visible = false
 
 [node name="Parent" type="GPUParticles3D" parent="."]
-amount = 1
+amount = 4
 sub_emitter = NodePath("../Child1")
 lifetime = 2.0
-process_material = SubResource( "ParticlesMaterial_wd8ac" )
-draw_pass_1 = SubResource( "QuadMesh_u11qf" )
+fixed_fps = 60
+process_material = SubResource("ParticlesMaterial_wd8ac")
+draw_pass_1 = SubResource("QuadMesh_u11qf")
 
 [node name="Child1" type="GPUParticles3D" parent="."]
 emitting = false
+amount = 200
 sub_emitter = NodePath("../Child2")
 lifetime = 2.0
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource( "ParticlesMaterial_uw0d8" )
-draw_pass_1 = SubResource( "QuadMesh_u11qf" )
+process_material = SubResource("ParticlesMaterial_uw0d8")
+draw_pass_1 = SubResource("QuadMesh_u11qf")
 
 [node name="Child2" type="GPUParticles3D" parent="."]
 emitting = false
-amount = 16
+amount = 512
 lifetime = 2.0
 explosiveness = 1.0
-process_material = SubResource( "ParticlesMaterial_nst7h" )
-draw_pass_1 = SubResource( "QuadMesh_u11qf" )
+process_material = SubResource("ParticlesMaterial_nst7h")
+draw_pass_1 = SubResource("QuadMesh_u11qf")
 
 [editable path="DefaultEnvironment"]

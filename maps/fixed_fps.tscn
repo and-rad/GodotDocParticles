@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgekqkpa74ot1"]
+
+[ext_resource type="PackedScene" uid="uid://dbqb0kjpk1ryo" path="res://maps/environment.tscn" id="1_r4vr6"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticlesMaterial_d7tl2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kvmkn"]
+shading_mode = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_ignmr"]
+material = SubResource("StandardMaterial3D_kvmkn")
+size = Vector2(0.1, 0.1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DefaultEnvironment" parent="." instance=ExtResource("1_r4vr6")]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+fixed_fps = 5
+interpolate = false
+process_material = SubResource("ParticlesMaterial_d7tl2")
+draw_pass_1 = SubResource("QuadMesh_ignmr")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
+fixed_fps = 5
+process_material = SubResource("ParticlesMaterial_d7tl2")
+draw_pass_1 = SubResource("QuadMesh_ignmr")
