@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://dbboyicygf58h"]
+
+[ext_resource type="PackedScene" uid="uid://dbqb0kjpk1ryo" path="res://maps/environment.tscn" id="1_r4vr6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kvmkn"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_w7y6i"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+gravity = Vector3(0, 0, 0)
+color = Color(0.266667, 0.709804, 1, 1)
+hue_variation_min = -0.6
+hue_variation_max = 0.6
+
+[sub_resource type="QuadMesh" id="QuadMesh_ifr53"]
+size = Vector2(0.1, 0.1)
+
+[sub_resource type="Curve" id="Curve_lk1bx"]
+min_value = -1.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DefaultEnvironment" parent="." instance=ExtResource("1_r4vr6")]
+
+[node name="ParticlesBackup" type="GPUParticles3D" parent="."]
+visible = false
+material_override = SubResource("StandardMaterial3D_kvmkn")
+amount = 128
+lifetime = 4.0
+process_material = SubResource("ParticleProcessMaterial_w7y6i")
+draw_pass_1 = SubResource("QuadMesh_ifr53")
+
+[node name="ConvertedParticles" type="CPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_kvmkn")
+amount = 128
+lifetime = 4.0
+fixed_fps = 30
+mesh = SubResource("QuadMesh_ifr53")
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+gravity = Vector3(0, 0, 0)
+color = Color(0.333333, 0.572549, 1, 1)
+hue_variation_min = -0.41
+hue_variation_max = 0.47
+hue_variation_curve = SubResource("Curve_lk1bx")

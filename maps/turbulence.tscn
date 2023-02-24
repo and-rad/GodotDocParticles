@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://x581fefieqe5"]
+
+[ext_resource type="PackedScene" uid="uid://dbqb0kjpk1ryo" path="res://maps/environment.tscn" id="1_q3ws3"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ahfv5"]
+load_path = "res://.godot/imported/sprite.webp-74dc4fd9be03d93f7c748436a1c8f804.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kn888"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource("CompressedTexture2D_ahfv5")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_6ehkk"]
+offsets = PackedFloat32Array(0, 0.170213, 0.425532, 0.64539, 0.921986, 1)
+colors = PackedColorArray(0.789642, 1, 0.923565, 1, 0.235452, 1, 0.857347, 1, 0, 0.307804, 1, 1, 0.34727, 0.179725, 1, 1, 0.756698, 0.37882, 1, 0.72549, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_22aly"]
+gradient = SubResource("Gradient_6ehkk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rqqv8"]
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_22aly")
+turbulence_enabled = true
+turbulence_noise_strength = 2.43
+turbulence_noise_scale = 4.01
+turbulence_noise_speed = Vector3(0, 0, 0)
+turbulence_influence_max = 0.83
+turbulence_initial_displacement_min = -1.0
+turbulence_initial_displacement_max = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_lfibq"]
+size = Vector2(0.02, 0.02)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_kn888")
+cast_shadow = 0
+amount = 10000
+lifetime = 4.0
+process_material = SubResource("ParticleProcessMaterial_rqqv8")
+draw_pass_1 = SubResource("QuadMesh_lfibq")
+
+[node name="DefaultEnvironment" parent="." instance=ExtResource("1_q3ws3")]
